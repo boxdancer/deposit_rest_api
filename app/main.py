@@ -42,3 +42,8 @@ async def deposit_calculation(deposit: Deposit):
         respond_dict[date_payments[i]] = round(deposit.amount, 2)
 
     return respond_dict
+
+
+@app.get("/")
+async def alive_status():
+    return {"message": "Hello World, I'm alive"}
