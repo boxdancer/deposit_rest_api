@@ -1,11 +1,20 @@
-from datetime import datetime
 import calendar
+import re
+from datetime import datetime
 
 
-def get_next_dates(date_str, periods):
-    # Преобразуем строку в объект даты
-    date = datetime.strptime(date_str, "%d.%m.%Y")
+def validate_date_string(date_string: str) -> bool:
+    # регулярка для проверки формата передаваемой даты
+    pattern = r"^\d{2}\.\d{2}\.\d{4}$"
+    if re.match(pattern, date_string):
+        date_string = date_string.split('.')
+        if len(date_string) == 3 and (1 <= int(date_string[0]) <= 31) and (1 <= int(date_string[1]) <= 12) and (
+                1000 <= int(date_string[2]) <= 9999):
+            return True
+    return False
 
+
+def get_next_dates(date: datetime, periods: int) -> list[str]:
     # Список для хранения результатов
     dates = [date]
 
@@ -34,7 +43,5 @@ def get_next_dates(date_str, periods):
 
 if __name__ == '__main__':
     # Пример использования
-    # print(get_next_dates("13.12.2023", 3))
-    test = get_next_dates('31.01.1932', 25)
+    test = get_next_dates(datetime(2022, 1, 31), 6)
     print(test)
-
