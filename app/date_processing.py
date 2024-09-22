@@ -4,7 +4,7 @@ from datetime import datetime
 
 
 def validate_date_string(date_string: str) -> bool:
-    # регулярка для проверки формата передаваемой даты
+    # Регулярное выражение для проверки формата передаваемой даты
     pattern = r"^\d{2}\.\d{2}\.\d{4}$"
     if re.match(pattern, date_string):
         date_string = date_string.split('.')
